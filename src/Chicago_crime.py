@@ -96,12 +96,12 @@ def geo_maps(df, measure, year):
 #geo_maps(geo_df, Arrest, 2010)    
 
 
-# fig,ax = plt.subplots(figsize = (15, 15))
-# street_map.plot(ax = ax, alpha = .4, color='grey')
-# geo_df['Primary Type'].values.plot(ax=ax)
-# plt.title('Calls by Primary Type 2010')
-# plt.legend(prop={'size': 15})
-# plt.show()
+fig,ax = plt.subplots(figsize = (15, 15))
+street_map.plot(ax = ax, alpha = .4, color='grey')
+geo_df['Primary Type'].values.plot(ax=ax)
+plt.title('Calls by Primary Type 2010')
+plt.legend(prop={'size': 15})
+plt.show()
 
 ###geomap of DV calls 
 # fig, ax = plt.subplots(figsize=(15,15))
@@ -121,8 +121,7 @@ def plot_eda_hist(measure, year):
     plt.hist(subchicagocrimes[measure])
     plt.xticks(rotation = 45, fontsize = 6)
     #ax.set_xticklabels(measure.labels, rotation = 45)
-    plt.title(measure)
-    plt.title(measure, year)
+    plt.title(year)
     return
 
 def plot_eda_lines(measure, y):
@@ -191,8 +190,8 @@ def plot_eda_lines(measure, y):
 # vif.round(1)
 
 ##########logistic regression
-X = Xmatrixnona.drop(['Arrest', 'Beat', 'District', 'Community Area', 'Year', 'Latitude', 'Longitude', 'Zip Codes'], axis=1)
-y = Xmatrixnona['Arrest'] 
+X = Xmatrixnona.drop(['Domestic', 'Beat', 'District', 'Community Area', 'Year', 'Latitude', 'Longitude', 'Zip Codes'], axis=1)
+y = Xmatrixnona['Domestic'] 
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.25,random_state=0, stratify = y) 
 
 logistic_regression= LogisticRegression(class_weight='balanced')
