@@ -35,6 +35,12 @@ Chicago crimes summarized by Primary Types for 2010 and 2018 are presented below
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/PrimaryType2010.png)
 
 
+2012 Crimes by Primary Type
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/PrimaryType2012.png)
+
+
 2018 Crimes by Primary Type
 
 
