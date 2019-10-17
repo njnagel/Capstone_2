@@ -24,4 +24,45 @@ The intent of this project is to look at Chicago crime data and assess whether t
 
 This dataset reflects reported incidents of crime (with the exception of murders where data exists for each victim) that occurred in the City of Chicago from 2010 to 2018, minus the most recent seven days. Data is extracted from the Chicago Police Department's CLEAR (Citizen Law Enforcement Analysis and Reporting) system. In order to protect the privacy of crime victims, addresses are shown at the block level only and specific locations are not identified. Should you have questions about this dataset, you may contact the Research & Development Division of the Chicago Police Department at 312.745.6071 or RandD@chicagopolice.org. Disclaimer: These crimes may be based upon preliminary information supplied to the Police Department by the reporting parties that have not been verified. The preliminary crime classifications may be changed at a later date based upon additional investigation and there is always the possibility of mechanical or human error. Therefore, the Chicago Police Department does not guarantee (either expressed or implied) the accuracy, completeness, timeliness, or correct sequencing of the information and the information should not be used for comparison purposes over time. The Chicago Police Department will not be responsible for any error or omission, or for the use of, or the results obtained from the use of this information.
 
-The columns in the original dataset include: CaseNumber, ID, Date, Block, IUCR, Primary Type (of Crime), Crime Description, Location Description, Beat, Ward, District, Community Area, Arrest (T/F), Domestic (T/F), X Coordinate, Y Coordinate, Latitude, Longitude, and Location.  Chicago police areas are brokenSince the geographic classifications of Beat, Ward, District, and Community Area are at least partly correlated, I undertook an assessment of Variance Inflation Factors associated with the features. 
+The columns in the original dataset include: CaseNumber, ID, Date, Block, IUCR, Primary Type (of Crime), Crime Description, Location Description, Beat, Ward, District, Community Area, Arrest (T/F), Domestic (T/F), X Coordinate, Y Coordinate, Latitude, Longitude, and Location.  
+
+
+
+Chicago crimes summarized by Primary Types for 2010, 2012, and 2018 are presented below:
+
+2010 Crimes by Primary Type
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/PrimaryType2010.png)
+
+
+2012 Crimes by Primary Type
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/PrimaryType2012.png)
+
+
+2018 Crimes by Primary Type
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/PrimaryType2018.png)
+
+
+Arrests and Domestic Violence calls are sumarized over the time period in the chart below. Note that events from 2019 are included, althouogh the reporting year is still in process.
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/ArrestsDomesticbyYear.png)
+
+
+Note that arrests have declined consistently over the years, while DV calls have remained relatively steady. We can see from the plot of Chicago population that the numbers of residents have also remained essentially the same from 2010 to 2018.
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/Chicago%20Pop%20by%20Year.png)
+
+
+
+
+
+
+
+
+
+
