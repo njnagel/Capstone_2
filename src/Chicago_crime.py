@@ -96,12 +96,12 @@ def geo_maps(df, measure, year):
 #geo_maps(geo_df, Arrest, 2010)    
 
 
-fig,ax = plt.subplots(figsize = (15, 15))
-street_map.plot(ax = ax, alpha = .4, color='grey')
-geo_df['Primary Type'].values.plot(ax=ax)
-plt.title('Calls by Primary Type 2010')
-plt.legend(prop={'size': 15})
-plt.show()
+# fig,ax = plt.subplots(figsize = (15, 15))
+# street_map.plot(ax = ax, alpha = .4, color='grey')
+# geo_df['Primary Type'].values.plot(ax=ax)
+# plt.title('Calls by Primary Type 2010')
+# plt.legend(prop={'size': 15})
+# plt.show()
 
 ###geomap of DV calls 
 # fig, ax = plt.subplots(figsize=(15,15))
@@ -134,17 +134,25 @@ def plot_eda_lines(measure, y):
     plt.title(year)
     return
 
+
+##############Plot City pop by year
 # lists = sorted(chicagopops.items()) # sorted by key, return a list of tuples
 # x, y = zip(*lists) # unpack a list of pairs into two tuples
 # plt.plot(x, y)
 # plt.xticks(fontsize=10)
 # plt.title('City of Chicago Population by Year')
 # plt.show()
+###########plot arrests and domestic events by year
+a=(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018)
+b = (73758, 69947, 67009, 60808, 54582, 51359, 53436, 52733, 52470)
+arrestsbyyear = Xmatrixnona.groupby('Year')['Arrest'].sum()
+domesticbyyear = Xmatrixnona.groupby('Year')['Domestic'].sum()
 
-# fig,ax = plt.subplots(figsize = (15, 15))
-# ax.plot(arrestsbyyear.index,arrestsbyyear.values, color='red')
-# ax.plot(domesticbyyear.index,domesticbyyear.values, color = 'blue')
-# plt.title('Arrests and Domestic Events by Year')
+fig,ax = plt.subplots(figsize = (15, 15))
+ax.plot(a,b, color='green')
+ax.plot(arrestsbyyear.index,arrestsbyyear.values, color='red')
+ax.plot(domesticbyyear.index,domesticbyyear.values, color = 'blue')
+plt.title('Calls, Arrests and Domestic Events by Year')
 
 # fig,ax = plt.subplots()
 # for primtype in primtypes:
@@ -197,19 +205,19 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.25,random_state
 logistic_regression= LogisticRegression(class_weight='balanced')
 model = logistic_regression.fit(X_train,y_train)
 y_pred=logistic_regression.predict(X_test)
-print(model)
+#print(model)
 
 coeffs = pd.DataFrame(zip(X.columns, model.coef_))
-print('Coeffs:', coeffs)
+#print('Coeffs:', coeffs)
 
 confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
 f, ax = plt.subplots(1, figsize=(10, 8))
 
 sns.set(font_scale=2)
 plt.title('Confusion Matrix for Logistic Regression')
-sns.heatmap(confusion_matrix, annot=True, fmt='d', linewidths=.5, ax=ax)
+sns.heatmap(confusion_matrix, annot=True, fmt='d', linewidths=.5)
 
-print('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
+#print('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
 # results = confusion_matrix(y_test, y_pred) 
 # print('Confusion Matrix :')
 # print(results)  
@@ -239,7 +247,8 @@ FDR = FP/(TP+FP)
 # Overall accuracy
 
 if __name__ == '__main__':  
-
+    arrestsbyyear = Xmatrixnona.groupby('Year')['Arrest'].sum()
+    domesticbyyear = Xmatrixnona.groupby('Year')['Domestic'].sum()
     
     
     # plot_eda_hist('Arrest', 2010)
