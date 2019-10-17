@@ -14,83 +14,34 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 from numpy.linalg import svd
 
 #pd.options.display.max_colwidth = 50
+##########pulling sample from large file and saving to csv
+# filename = "data/Crimes_-_2001_to_present.csv"
+# p = 0.20  # 20% of the lines
+# # keep the header, then take only 20% of lines
+# # if random from [0,1] interval is greater than 0.01 the row will be skipped
+# df = pd.read_csv(
+#          filename,
+#          header=0, 
+#          skiprows=lambda i: i>0 and rd.random() > p
+# )
 
-filename = "data/Crimes_-_2001_to_present.csv"
-p = 0.20  # 20% of the lines
-# keep the header, then take only 20% of lines
-# if random from [0,1] interval is greater than 0.01 the row will be skipped
-df = pd.read_csv(
-         filename,
-         header=0, 
-         skiprows=lambda i: i>0 and rd.random() > p
-)
+# df = df.dropna()
+# df.to_csv('data/chicagocrimes.csv')
 
-chicagocrimes = df.dropna()
+chicagocrimes = pd.read_csv('data/chicagocrimes.csv')
+
 
 chicagocrimessub = chicagocrimes.where(chicagocrimes['Year'] >= 2010)
-street_map = gpd.read_file('data/geo_export_33ca7ae0-c469-46ed-84da-cc7587ccbfe6.shp')
-
+#pd.get_dummies(chicagocrimessub['District'])
+####convert t/f to binary
+     
+# chicagocrimessub['Domestic'] = chicagocrimessub['Domestic'].astype(int)
+# chicagocrimessub['Arrest'] = chicagocrimessub['Arrest'].astype(int)
 
 #####prepare data matrix
 Xmatrix = chicagocrimessub.drop(['ID', 'Case Number', 'Block', 'Date', 'IUCR', 'Primary Type', 'Description', 'Location Description', 'Police Districts', 'Police Beats','FBI Code', 'X Coordinate', 'Y Coordinate', 'Updated On', 'Location', 'Historical Wards 2003-2015', 'Boundaries - ZIP Codes'], axis = 1)
 Xmatrix = Xmatrix.astype('float')
 Xmatrixnona = Xmatrix.dropna()
-Xmatrixmap = Xmatrixnona.drop(['Ward', 'District', 'Beat', 'Community Area', 'Community Areas', 'Census Tracts', 'Zip Codes', 'Wards'], axis=1)
-Xmatrixmap2010=Xmatrixmap[Xmatrixmap['Year'] == 2010]
-Xmatrixmap2018=Xmatrixmap[Xmatrixmap['Year'] == 2018]
-crs = {"init": 'epsg:4326'}
-geometry = [Point(xy) for xy in zip(Xmatrixmap2010["Longitude"], Xmatrixmap2010["Latitude"])]
-geometry18 = [Point(xy) for xy in zip(Xmatrixmap2018["Longitude"], Xmatrixmap2018["Latitude"])]
-#Xmatrixmap = Xmatrixnona['Year','Arrest', 'Domestic', 'Latitude', 'Longitude']
-
-geo_df = gpd.GeoDataFrame(Xmatrixmap2010, crs=crs, geometry=geometry)
-geo_df18 = gpd.GeoDataFrame(Xmatrixmap2018, crs=crs, geometry = geometry18)
-
-
-def geo_maps(df, measure, year):
-    fig,ax = plt.subplots(figsize = (15, 15))
-    street_map.plot(ax = ax, alpha = .4, color='grey')
-    df[df[measure] == 0].plot(ax = ax, markersize = 20, color='blue', marker="o", label="Neg")
-    df[df[measure] == 1].plot(ax=ax, markersize = 20, color = 'red', marker = "x", label='Pos')
-    plt.title(measure, 'by Location', year)
-    plt.legend(prop={'size': 15})
-    plt.show()
-
-geo_maps(geo_df, Arrest, 2010)    
-
-# fig, ax = plt.subplots(figsize=(15,15))
-# street_map.plot(ax = ax, alpha = .4, color='grey')
-# geo_df18[geo_df18['Arrest'] == 0].plot(ax = ax, markersize = 20, color='blue', marker="o", label="Neg")
-# geo_df18[geo_df18['Arrest'] == 1].plot(ax=ax, markersize = 20, color = 'red', marker = "x", label='Pos')
-# plt.title('Arrests by Location 2018')
-# plt.legend(prop={'size': 15})
-# plt.show()
-
-# fig,ax = plt.subplots(figsize = (15, 15))
-# street_map.plot(ax = ax, alpha = .4, color='grey')
-# geo_df[geo_df['Domestic'] == 1].plot(ax=ax, markersize = 20, color = 'red', marker = "x", label='DV')
-# plt.title('Domestic Violence Calls by Location 2010')
-# plt.legend(prop={'size': 15})
-# plt.show()
-
-# fig, ax = plt.subplots(figsize=(15,15))
-# street_map.plot(ax = ax, alpha = .4, color='grey')
-# geo_df18[geo_df18['Domestic'] == 1].plot(ax=ax, markersize = 20, color = 'red', marker = "x", label='DV')
-# plt.title('Domestic Violence Calls by Location 2018')
-# plt.legend(prop={'size': 15})
-# plt.show()
-
-#chicagocrimes = pd.read_csv('data/Crimes_-_2001_to_present.csv')
-#chicagocrimes.rename(columns={0: "ID", 1: "Case", 2: "Date", 3: "Block", 4: "IUCR", 5 : "PrimaryType", 6 : "Description", 7: "LocationDesc", 8: "Arrest", 9: "Domestic", 10: "Beat", 11: "District", 12: "Ward", 13: "CommunityArea", 14: "FBICode", 15: "Xcoord", 16: "Ycoord", 17: "Year", 18: "Updatedon", 19: "Lat", 20: "Long", 21: "Location"})
-
-
-
-
-#convert t/f to binary
-     
-# chicagocrimessub['Domestic'] = chicagocrimessub['Domestic'].astype(int)
-# chicagocrimessub['Arrest'] = chicagocrimessub['Arrest'].astype(int)
-
 
 ######Perform EDA
 
@@ -113,6 +64,48 @@ weekDays = ("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunda
 dayofweek = datetodatetime.dt.weekday
 #dayofweekasstring = weekDays[dayofweek]
 
+###########mapping
+#street_map = gpd.read_file('data/geo_export_33ca7ae0-c469-46ed-84da-cc7587ccbfe6.shp')
+# Xmatrixmap = Xmatrixnona.drop(['Ward', 'District', 'Beat', 'Community Area', 'Community Areas', 'Census Tracts', 'Zip Codes', 'Wards'], axis=1)
+# Xmatrixmap2010=Xmatrixmap[Xmatrixmap['Year'] == 2010]
+# Xmatrixmap2018=Xmatrixmap[Xmatrixmap['Year'] == 2018]
+# crs = {"init": 'epsg:4326'}
+# geometry = [Point(xy) for xy in zip(Xmatrixmap2010["Longitude"], Xmatrixmap2010["Latitude"])]
+# geometry18 = [Point(xy) for xy in zip(Xmatrixmap2018["Longitude"], Xmatrixmap2018["Latitude"])]
+# #Xmatrixmap = Xmatrixnona['Year','Arrest', 'Domestic', 'Latitude', 'Longitude']
+
+# geo_df = gpd.GeoDataFrame(Xmatrixmap2010, crs=crs, geometry=geometry)
+# geo_df18 = gpd.GeoDataFrame(Xmatrixmap2018, crs=crs, geometry = geometry18)
+
+
+def geo_maps(df, measure, year):
+    fig,ax = plt.subplots(figsize = (15, 15))
+    street_map.plot(ax = ax, alpha = .4, color='grey')
+    df[df[measure] == 0].plot(ax = ax, markersize = 20, color='blue', marker="o", label="Neg")
+    df[df[measure] == 1].plot(ax=ax, markersize = 20, color = 'red', marker = "x", label='Pos')
+    plt.title(measure, 'by Location', year)
+    plt.legend(prop={'size': 15})
+    plt.show()
+
+#geo_maps(geo_df, Arrest, 2010)    
+
+
+# fig,ax = plt.subplots(figsize = (15, 15))
+# street_map.plot(ax = ax, alpha = .4, color='grey')
+# geo_df[geo_df['Domestic'] == 1].plot(ax=ax, markersize = 20, color = 'red', marker = "x", label='DV')
+# plt.title('Domestic Violence Calls by Location 2010')
+# plt.legend(prop={'size': 15})
+# plt.show()
+
+# fig, ax = plt.subplots(figsize=(15,15))
+# street_map.plot(ax = ax, alpha = .4, color='grey')
+# geo_df18[geo_df18['Domestic'] == 1].plot(ax=ax, markersize = 20, color = 'red', marker = "x", label='DV')
+# plt.title('Domestic Violence Calls by Location 2018')
+# plt.legend(prop={'size': 15})
+# plt.show()
+
+
+
 ####Some plots
 def plot_eda_hist(measure, year):
 
@@ -122,7 +115,7 @@ def plot_eda_hist(measure, year):
     plt.xticks(rotation = 45, fontsize = 6)
     #ax.set_xticklabels(measure.labels, rotation = 45)
     plt.title(measure)
-    plt.title(measuasre, year)
+    plt.title(measure, year)
     return
 
 def plot_eda_lines(measure, y):
@@ -130,9 +123,9 @@ def plot_eda_lines(measure, y):
     fig, ax = plt.subplots(figsize=(10, 10))
     sns.lineplot(chicagocrimes[measure], y)
     plt.xticks(rotation = 45, fontsize = 6)
-    #ax.set_xticklabels(measure.labels, rotation = 45)
+    ax.set_xticklabels(measure.labels, rotation = 45)
     plt.title(measure)
-    #plt.title(year)
+    plt.title(year)
     return
 
 def plot_death_rates(data, measure):
@@ -149,6 +142,11 @@ def plot_death_rates(data, measure):
 # plt.xticks(fontsize=10)
 # plt.title('City of Chicago Population by Year')
 # plt.show()
+
+fig,ax = plt.subplots(figsize = (15, 15))
+ax.plot(arrestsbyyear.index,arrestsbyyear.values, color='red')
+ax.plot(domesticbyyear.index,domesticbyyear.values, color = 'blue')
+plt.title('Events by Year')
 
 # fig,ax = plt.subplots()
 # for primtype in primtypes:
@@ -171,7 +169,6 @@ def plot_death_rates(data, measure):
 #     plt.title('Primary Type of Crime by Arrest')
 #     ax.plot(x, y)
 #     plt.legend()
-
 
 
 ###########normalize the data
