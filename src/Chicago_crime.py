@@ -191,8 +191,8 @@ def plot_eda_lines(measure, y):
 # vif.round(1)
 
 ##########logistic regression
-X = Xmatrixnona.drop(['Domestic', 'Beat', 'District', 'Community Area', 'Year', 'Latitude', 'Longitude', 'Zip Codes'], axis=1)
-y = Xmatrixnona['Domestic'] 
+X = Xmatrixnona.drop(['Arrest', 'Beat', 'District', 'Community Area', 'Year', 'Latitude', 'Longitude', 'Zip Codes'], axis=1)
+y = Xmatrixnona['Arrest'] 
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.25,random_state=0, stratify = y) 
 
 logistic_regression= LogisticRegression(class_weight='balanced')
@@ -208,7 +208,7 @@ f, ax = plt.subplots(1, figsize=(10, 8))
 
 sns.set(font_scale=2)
 plt.title('Confusion Matrix for Logistic Regression')
-sns.heatmap(confusion_matrix, annot=True, ha='center', va='center', fmt="d", linewidths=.5, ax=ax)
+sns.heatmap(confusion_matrix, annot=True, fmt='d', linewidths=.5, ax=ax)
 
 print('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
 # results = confusion_matrix(y_test, y_pred) 
