@@ -28,7 +28,7 @@ The columns in the original dataset include: CaseNumber, ID, Date, Block, IUCR, 
 
 
 
-Chicago crimes summarized by Primary Types for 2010 and 2018 are presented below:
+Chicago crimes summarized by Primary Types for 2010, 2012, and 2018 are presented below:
 
 2010 Crimes by Primary Type
 
@@ -47,7 +47,7 @@ Chicago crimes summarized by Primary Types for 2010 and 2018 are presented below
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/PrimaryType2018.png)
 
 
-Arrests and Domestic Violence calls are sumarized over the time period in the chart below.
+Arrests and Domestic Violence calls are sumarized over the time period in the chart below. Note that events from 2019 are included, althouogh the reporting year is still in process.
 
 
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/ArrestsDomesticbyYear.png)
