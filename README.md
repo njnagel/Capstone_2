@@ -59,7 +59,8 @@ Highest occurring crimes are Battery, Other Offence, Weapons, Theft, Criminal Da
 
 2012 Crimes by Primary Type
 
-Highest include Burglary, Theft, Disturbing the Peace, Assault, Narcotics
+Highest include Burglary, Theft, Disturbing the Peace, Assault, Narcotics.
+
 This year Chicago hosted the NATO and G8 summits.
 
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/PrimaryType2012.png)
@@ -67,7 +68,8 @@ This year Chicago hosted the NATO and G8 summits.
 
 2018 Crimes by Primary Type
 
-Most common were Criminal Damage, Battery, Theft, Criminal Trespass, Weapons, Narcotics
+Most common were Criminal Damage, Battery, Theft, Criminal Trespass, Weapons, Narcotics.
+
 Largely youth related criminal damage and trespass. May be indicative of less policing.
 
 
