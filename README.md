@@ -1,8 +1,5 @@
 
 
-![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/CPDimage.png)
-
-
 
 
 # Chicago Crimes 2010 - 2018, or Al Capone's Vault
