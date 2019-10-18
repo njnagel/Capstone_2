@@ -16,7 +16,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 
-#pd.options.display.max_colwidth = 50
+pd.options.display.max_colwidth = 100
 ##########pulling sample from large file and saving to csv
 # filename = "data/Crimes_-_2001_to_present.csv"
 # p = 0.20  # 20% of the lines
@@ -205,10 +205,10 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.25,random_state
 logistic_regression= LogisticRegression(class_weight='balanced')
 model = logistic_regression.fit(X_train,y_train)
 y_pred=logistic_regression.predict(X_test)
-#print(model)
+(model)
 
 coeffs = pd.DataFrame(zip(X.columns, model.coef_))
-#print('Coeffs:', coeffs)
+print('Coeffs:', coeffs)
 
 confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
 f, ax = plt.subplots(1, figsize=(10, 8))
@@ -217,12 +217,12 @@ sns.set(font_scale=2)
 plt.title('Confusion Matrix for Logistic Regression')
 sns.heatmap(confusion_matrix, annot=True, fmt='d', linewidths=.5)
 
-#print('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
+('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
 # results = confusion_matrix(y_test, y_pred) 
-# print('Confusion Matrix :')
-# print(results)  
-# print('Report : ')
-# print(classification_report(y_test, y_pred)) 
+# ('Confusion Matrix :')
+# (results)  
+# ('Report : ')
+# (classification_report(y_test, y_pred)) 
 
 FP = confusion_matrix.sum(axis=0) - np.diag(confusion_matrix)  
 FN = confusion_matrix.sum(axis=1) - np.diag(confusion_matrix)
@@ -245,6 +245,8 @@ FNR = FN/(TP+FN)
 FDR = FP/(TP+FP)
 
 # Overall accuracy
+Sensitivity = TPR/(FNR + TPR)
+Accuracy = (TPR + TNR)/(TPR+TNR+FPR+FNR)
 
 if __name__ == '__main__':  
     arrestsbyyear = Xmatrixnona.groupby('Year')['Arrest'].sum()
