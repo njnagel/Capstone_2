@@ -1,3 +1,10 @@
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/CPDimage.png)
+
+
+
+
 # Chicago Crimes 2010 - 2018
 
 The Chicago Police Department (CPD) is the law enforcement agency of the U.S. city of Chicago, Illinois, under the jurisdiction of the City Council. The Police Superintendent serves as an apointee of the mayor. It is the second-largest municipal police department in the United States. It has approximately 13,500 officers. There are 22 police districts, 50 wards, 77 Community Areas, and 285 beats. There is considerable overlap in the geographic designations, though no two classifications are 100% nested.
@@ -120,9 +127,35 @@ To determine extent of relationships and identify redundant features, a Variance
 
 # Logistic Regression
 
+Coefficients of Model - very small
+
+Coefficients correspond to intercept, Arrest, Ward, and Census Tract
+
+[3.417290285208584e-08, -0.0003784134375290321, -0.009620818975723106, 0.00041282222807018017]
+
+
+The confusion matrix on the test set shows poor performance.
+
 
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/confmatrixreg.png)
 
+
+The Accuracy score of .566 reflects the poor fit.
+
+We are concerned with sensitivity because we would like to focus on false negatives (where we expect to see DV events and there are none). The Sensitivity (TP/(TP + FN)) also reflects a poor performance at .48.
+
+
+# Next Steps
+
+1. Answer the question - do arrest rates differ for DV calls by geographic area?
+
+2. Hot Encode features and rerun analysis
+
+3. Supplement original dataset with population counts to get rates 
+
+4. Add demographics by Census Tract to relate to DV calls and Arrests
+
+5. Incorporate pollution data to relate to violent crimes (Capstone 4)
 
 
 
