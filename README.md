@@ -109,6 +109,12 @@ Domestic Violence events can be seen for the two years below.
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/DV%20Calls%202018map.png)
 
 
+What are those pockets of no arrests? In the map below the dark blue areas have income at a 1.5 higher rate than the city average.
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/zoneofaff.png)
+
+
 
 # Modelling
 
@@ -156,6 +162,8 @@ We are concerned with sensitivity because we would like to focus on false negati
 4. Add demographics by Census Tract to relate to DV calls and Arrests
 
 5. Incorporate pollution data to relate to violent crimes (Capstone 4)
+
+
 
 
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/dataguy.png)
