@@ -133,6 +133,10 @@ To determine extent of relationships and identify redundant features, a Variance
 
 # Logistic Regression
 
+Predicting DV call (yes/no) from Arrest (yes/no), Ward, and Census Tract.
+
+Since there was significant class imbalance for DV calls, I included the option of class weights = balanced. 
+
 Coefficients of Model - very small
 
 Coefficients correspond to intercept, Arrest, Ward, and Census Tract
@@ -158,7 +162,7 @@ AKA - Al Capone's Vault - Nothing there!
 
 1. Answer the question - do arrest rates differ for DV calls by geographic area?
 
-2. Hot Encode features and rerun analysis
+2. Hot Encode features and rerun analysis, cross validation
 
 3. Supplement original dataset with population counts to get rates 
 
