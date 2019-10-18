@@ -39,6 +39,13 @@ Analysis was completed in Pandas and Matplotlib. Mapping was done using GeoPanda
 
 # EDA
 
+
+The correlation heat map of the columns:
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/corrheatmap.png)
+
+
 Chicago crimes summarized by Primary Types for 2010, 2012, and 2018 are presented below:
 
 2010 Crimes by Primary Type
@@ -80,7 +87,25 @@ A key question is whether the severity of crimes has changed over the years.  We
 
 # Events by Location
 
-We can look for patterns related to location.
+We can look for patterns related to location as well.  The map of Calls as a function of whether there was an arrest are below for the years of 2010 and 2018.
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/Arrests2010map.png)
+
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/Arrests2018map.png)
+
+
+Domestic Violence events can be seen for the two years below.
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/DV%20Calls%202010map.png)
+
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/DV%20Calls%202018map.png)
+
+
 
 
 
