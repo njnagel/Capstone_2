@@ -112,6 +112,20 @@ Domestic Violence events can be seen for the two years below.
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/DV%20Calls%202018map.png)
 
 
+We can look at just DV events by whether there was an arrest.
+
+The total number of DV events for 2010 was 10513. The map below presents arrests vs. nonarrests.
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/ArrestsforDV2010.png)
+
+
+The same map for 2018 shows the outcomes of 8699 DV calls.
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/ArrestsforDV2018.png)
+
+
 What are those pockets of no arrests? In the map below the dark blue areas have income at a 1.5 higher rate than the city average.
 
 
