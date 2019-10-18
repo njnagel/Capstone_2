@@ -150,12 +150,23 @@ Coefficients correspond to intercept, Arrest, Ward, and Census Tract
 The confusion matrix on the test set shows poor performance.
 
 
+
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/confmatrixreg.png)
+
+
+
 
 
 The Accuracy score of .566 reflects the poor fit.
 
 We are concerned with sensitivity because we would like to focus on false negatives (where we expect to see DV events and there are none). The Sensitivity (TP/(TP + FN)) also reflects a poor performance at .48.
+
+
+
+
+
+
+
 
 
 AKA - Al Capone's Vault - Nothing there!
