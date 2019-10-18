@@ -40,17 +40,12 @@ Analysis was completed in Pandas and Matplotlib. Mapping was done using GeoPanda
 # EDA
 
 
-The correlation heat map of the columns:
-
-
-![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/corrheatmap.png)
-
-
 Chicago crimes summarized by Primary Types for 2010, 2012, and 2018 are presented below:
 
 2010 Crimes by Primary Type
 
 Highest occurring crimes are Battery, Other Offence, Weapons, Theft, Criminal Damage, Narcotics
+
 
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/PrimaryType2010.png)
 
@@ -89,6 +84,7 @@ A key question is whether the severity of crimes has changed over the years.  We
 
 We can look for patterns related to location as well.  The map of Calls as a function of whether there was an arrest are below for the years of 2010 and 2018.
 
+
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/Arrests2010map.png)
 
 
@@ -104,6 +100,38 @@ Domestic Violence events can be seen for the two years below.
 
 
 ![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/DV%20Calls%202018map.png)
+
+
+
+# Modelling
+
+
+The goal was to predict DV based on a predictive logistic regression.
+
+  # Feature Reduction
+  
+  
+  
+To determine extent of relationships and identify redundant features, a Variance Inflation Factors analysis was done.  Any feature with a factor greater than 10 was removed.  This resulted in the final X matrix features to be Arrest, Ward, and Census Tract.  
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/VIFresults.png)
+
+
+# Logistic Regression
+
+
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/confmatrixreg.png)
+
+
+
+
+
+
+
+
+
+
 
 
 
