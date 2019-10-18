@@ -6,6 +6,7 @@ from random import sample
 import numpy as np 
 import matplotlib.pyplot as plt
 import seaborn as sns
+from seaborn import heatmap
 import datetime 
 import descartes
 import geopandas as gpd 
@@ -70,17 +71,22 @@ weekDays = ("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunda
 #dayofweekasstring = weekDays[dayofweek]
 
 ###########mapping
-# street_map = gpd.read_file('data/geo_export_33ca7ae0-c469-46ed-84da-cc7587ccbfe6.shp')
-# Xmatrixmap = Xmatrixnona.drop(['Ward', 'District', 'Beat', 'Community Area', 'Community Areas', 'Census Tracts', 'Zip Codes'], axis=1)
-# Xmatrixmap2010=Xmatrixmap[Xmatrixmap['Year'] == 2010]
-# Xmatrixmap2018=Xmatrixmap[Xmatrixmap['Year'] == 2018]
-# crs = {"init": 'epsg:4326'}
+street_map = gpd.read_file('data/geo_export_33ca7ae0-c469-46ed-84da-cc7587ccbfe6.shp')
+Xmatrixmap = Xmatrixnona.drop(['Ward', 'District', 'Beat', 'Community Area', 'Census Tracts', 'Zip Codes'], axis=1)
+Xmatrixmap2010=Xmatrixmap[Xmatrixmap['Year'] == 2010]
+Xmatrixmap2018=Xmatrixmap[Xmatrixmap['Year'] == 2018]
+XmatrixmapDom2010 = Xmatrixmap2010[Xmatrixmap2010['Domestic'] == 1]
+XmatrixmapDom2018 = Xmatrixmap2018[Xmatrixmap2018['Domestic'] == 1]
+crs = {"init": 'epsg:4326'}
 # geometry = [Point(xy) for xy in zip(Xmatrixmap2010["Longitude"], Xmatrixmap2010["Latitude"])]
 # geometry18 = [Point(xy) for xy in zip(Xmatrixmap2018["Longitude"], Xmatrixmap2018["Latitude"])]
+geometrydom2010 = [Point(xy) for xy in zip(XmatrixmapDom2010["Longitude"], XmatrixmapDom2010["Latitude"])]
+geometrydom2018 = [Point(xy) for xy in zip(XmatrixmapDom2018["Longitude"], XmatrixmapDom2018["Latitude"])]
 # #Xmatrixmap = Xmatrixnona['Year','Arrest', 'Domestic', 'Latitude', 'Longitude']
 # geo_df = gpd.GeoDataFrame(Xmatrixmap2010, crs=crs, geometry=geometry)
 # geo_df18 = gpd.GeoDataFrame(Xmatrixmap2018, crs=crs, geometry = geometry18)
-
+geo_dfdom2010 = gpd.GeoDataFrame(XmatrixmapDom2010, crs=crs, geometry = geometrydom2010)
+geo_dfdom2018 = gpd.GeoDataFrame(XmatrixmapDom2018, crs=crs, geometry = geometrydom2018)
 # ptdfarrest = geo_df.groupby('Primary Type')['Arrest']
 # ptarrestdf = pd.DataFrame(ptdfarrest)
 
@@ -183,12 +189,12 @@ plt.title('Calls, Arrests and Domestic Events by Year')
 # plt.matshow(Xmatrixnona.corr(), fignum=f.number)
 # plt.xticks(range(Xmatrixnona.shape[1]), Xmatrixnona.columns, fontsize=14, rotation=45)
 # plt.yticks(range(Xmatrixnona.shape[1]), Xmatrixnona.columns, fontsize=14)
+# # heatmap.yaxis.set_ticklabels(heatmap.yaxis.get_ticklabels(), rotation=0, ha='right', fontsize=fontsize)
+# # heatmap.xaxis.set_ticklabels(heatmap.xaxis.get_ticklabels(), rotation=45, ha='right', fontsize=fontsize)
 # cb = plt.colorbar()
 # cb.ax.tick_params(labelsize=14)
-#plt.title('Correlation Matrix', fontsize=16);
+# plt.title('Correlation Matrix', fontsize=16);
 
-#pd.plotting.scatter_matrix(Xmatrixnona)
-#plt.show()
 
 ###############VIF to reduce features
 #Xmatrixnona=Xmatrixnona.drop('Domestic')
@@ -215,8 +221,9 @@ f, ax = plt.subplots(1, figsize=(10, 8))
 
 sns.set(font_scale=2)
 plt.title('Confusion Matrix for Logistic Regression')
-sns.heatmap(confusion_matrix, annot=True, fmt='d', linewidths=.5)
-
+hm = sns.heatmap(confusion_matrix, annot=True, fmt='d', linewidths=.5)
+# hm.yaxis.set_ticklabels(heatmap.yaxis.get_ticklabels(), rotation=0,  va='center', ha='right', fontsize=fontsize)
+# hm.xaxis.set_ticklabels(heatmap.xaxis.get_ticklabels(), rotation=45, va='center', ha='right', fontsize=fontsize)
 ('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
 # results = confusion_matrix(y_test, y_pred) 
 # ('Confusion Matrix :')
@@ -251,6 +258,9 @@ Accuracy = (TPR + TNR)/(TPR+TNR+FPR+FNR)
 if __name__ == '__main__':  
     arrestsbyyear = Xmatrixnona.groupby('Year')['Arrest'].sum()
     domesticbyyear = Xmatrixnona.groupby('Year')['Domestic'].sum()
+    domesticbyyearvc = Xmatrixnona.groupby('Year')['Domestic'].value_counts()
+
+    subchicagocrimes = chicagocrimessub[chicagocrimessub['Domestic'] == 1]
     
     
     # plot_eda_hist('Arrest', 2010)
