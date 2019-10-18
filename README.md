@@ -158,6 +158,9 @@ We are concerned with sensitivity because we would like to focus on false negati
 5. Incorporate pollution data to relate to violent crimes (Capstone 4)
 
 
+![alt text](https://github.com/njnagel/Capstone_2/blob/master/img/dataguy.png)
+
+
 
 
 
